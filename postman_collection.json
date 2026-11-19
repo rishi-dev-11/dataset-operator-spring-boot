@@ -1,0 +1,165 @@
+{
+  "info": {
+    "_postman_id": "a6c1b39e-4c12-4c88-9a91-dataset-operator-v1",
+    "name": "JSON Dataset Group-By & Sort-By Operator API",
+    "description": "Postman test collection covering Insert Record, Group-By, Sort-By (ASC/DESC), Combined Operators, and Error Handling.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "datasetName",
+      "value": "employee_dataset",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Insert Record - John Doe (Engineering)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1,\n  \"name\": \"John Doe\",\n  \"age\": 30,\n  \"department\": \"Engineering\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/dataset/{{datasetName}}/record",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dataset", "{{datasetName}}", "record"]
+        }
+      }
+    },
+    {
+      "name": "2. Insert Record - Jane Smith (Engineering)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 2,\n  \"name\": \"Jane Smith\",\n  \"age\": 25,\n  \"department\": \"Engineering\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/dataset/{{datasetName}}/record",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dataset", "{{datasetName}}", "record"]
+        }
+      }
+    },
+    {
+      "name": "3. Insert Record - Alice Brown (Marketing)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 3,\n  \"name\": \"Alice Brown\",\n  \"age\": 28,\n  \"department\": \"Marketing\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/dataset/{{datasetName}}/record",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dataset", "{{datasetName}}", "record"]
+        }
+      }
+    },
+    {
+      "name": "4. Query with Group-By (department)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/dataset/{{datasetName}}/query?groupBy=department",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dataset", "{{datasetName}}", "query"],
+          "query": [
+            { "key": "groupBy", "value": "department" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "5. Query with Sort-By (age asc)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/dataset/{{datasetName}}/query?sortBy=age&order=asc",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dataset", "{{datasetName}}", "query"],
+          "query": [
+            { "key": "sortBy", "value": "age" },
+            { "key": "order", "value": "asc" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "6. Query with Sort-By (age desc)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/dataset/{{datasetName}}/query?sortBy=age&order=desc",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dataset", "{{datasetName}}", "query"],
+          "query": [
+            { "key": "sortBy", "value": "age" },
+            { "key": "order", "value": "desc" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "7. Query Combined (groupBy=department & sortBy=age asc)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/dataset/{{datasetName}}/query?groupBy=department&sortBy=age&order=asc",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dataset", "{{datasetName}}", "query"],
+          "query": [
+            { "key": "groupBy", "value": "department" },
+            { "key": "sortBy", "value": "age" },
+            { "key": "order", "value": "asc" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "8. Error Handling - 404 Non-Existent Dataset",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/dataset/non_existent_dataset/query?groupBy=department",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dataset", "non_existent_dataset", "query"],
+          "query": [
+            { "key": "groupBy", "value": "department" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "9. Error Handling - 400 Invalid Sort Order",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/dataset/{{datasetName}}/query?sortBy=age&order=random",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "dataset", "{{datasetName}}", "query"],
+          "query": [
+            { "key": "sortBy", "value": "age" },
+            { "key": "order", "value": "random" }
+          ]
+        }
+      }
+    }
+  ]
+}

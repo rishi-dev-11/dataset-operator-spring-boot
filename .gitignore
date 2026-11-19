@@ -1,0 +1,30 @@
+# Java / Maven
+target/
+
+# IDE specific
+.idea/
+.vscode/
+
+# Log files
+*.log
+
+# H2 Database (file-backed, used in dev)
+*.h2.db
+*.mv.db
+
+# Loom video script
+loom-video-script.txt
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Spring Boot prod profile properties
+*.properties
+
+# Maven local cache (if present in project)
+.m2/
+
+# Environment files
+.env
+.env.*
